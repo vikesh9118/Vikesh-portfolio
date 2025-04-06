@@ -1,7 +1,9 @@
 {
-  "name": "my-portfolio",
-  "version": "0.1.0",
-  "private": true,
+ "name": "vikesh-kumar-portfolio",
+  "version": "1.0.0",
+  "description": "A professional portfolio showcasing Vikesh Kumar’s full stack development projects.",
+  "author": "Vikesh Kumar",
+  "homepage": "https://vikeshkumar.dev",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
