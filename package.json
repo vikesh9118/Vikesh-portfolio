@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A professional portfolio showcasing Vikesh Kumar’s full stack development projects.",
   "author": "Vikesh Kumar",
-  "homepage": "https://vikesh9118.github.io/vikesh-portfolio",
+  "homepage": "https://vikesh9118.github.io/my-portfolio",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
