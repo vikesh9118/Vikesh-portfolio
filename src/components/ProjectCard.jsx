@@ -1,69 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Link } from "lucide-react";
-
-const techColors = {
-  "React": "bg-blue-600",
-  "Node.js": "bg-green-600",
-  "MongoDB": "bg-green-700",
-  "Tailwind CSS": "bg-cyan-600",
-  "Framer Motion": "bg-pink-600",
-  "Redux": "bg-purple-600",
-  "DICOM": "bg-orange-500",
-  "Chart.js": "bg-yellow-600",
-  "JavaScript": "bg-yellow-500",
-  "AWS Amplify": "bg-purple-700",
-  "AI": "bg-red-600",
-  "MUI": "bg-blue-800",
-  "Unlayer": "bg-rose-600",
-  "Nodemailer": "bg-emerald-600"
-};
+import { ExternalLink, Github } from "lucide-react";
 
 const ProjectCard = ({
-  title,
-  description,
-  techStack,
-  image,
-  github,
-  live,
-  type,
+  title = "",
+  description = "",
+  techStack = [],
+  image = "",
+  github = "",
+  live = "",
 }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="group relative bg-zinc-900 hover:bg-zinc-800 transition-all duration-300 rounded-2xl overflow-hidden shadow-xl border border-zinc-700 min-h-[32rem] flex flex-col"
+      className="bg-zinc-800 hover:bg-zinc-700 transition-all duration-300 p-5 rounded-2xl shadow-xl flex flex-col lg:flex-row gap-6 border border-zinc-700"
     >
-      {type && (
-        <span className="absolute top-4 left-4 bg-blue-600 text-white text-xs px-3 py-1 rounded-full z-10 shadow-md">
-          {type}
-        </span>
-      )}
+      <img
+        src={image}
+        alt={title}
+        className="w-full lg:w-1/2 h-auto rounded-xl object-cover border border-zinc-700"
+      />
 
-      <div className="overflow-hidden h-64">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-      </div>
-
-      <div className="p-6 flex flex-col justify-between flex-1">
+      <div className="flex flex-col justify-between w-full">
         <div>
-          <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-          <p className="text-sm text-zinc-400 mb-4 line-clamp-3">
-            {description}
-          </p>
+          <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
+          <p className="text-zinc-300 text-sm mb-4 leading-relaxed">{description}</p>
 
           <div className="flex flex-wrap gap-2 mb-4">
-            {techStack.map((tech, idx) => (
+            {techStack?.map((tech, index) => (
               <span
-                key={idx}
-                className={`${
-                  techColors[tech] || "bg-zinc-700"
-                } text-white px-3 py-1 text-xs rounded-full`}
+                key={index}
+                className="text-xs px-3 py-1 rounded-full bg-primary text-white font-medium tracking-wide"
               >
                 {tech}
               </span>
@@ -71,30 +41,29 @@ const ProjectCard = ({
           </div>
         </div>
 
-        <div className="flex justify-between items-center mt-auto">
-          <a
-            href={github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-sm text-zinc-300 hover:text-white"
-            aria-label="View GitHub Repository"
-            title="Source Code"
-          >
-            <Github className="w-4 h-4" />
-            Code
-          </a>
-
-          <a
-            href={live}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 text-sm text-zinc-300 hover:text-white"
-            aria-label="View Live Project"
-            title="Live Demo"
-          >
-            <Link className="w-4 h-4" />
-            Live
-          </a>
+        <div className="flex gap-4 mt-2">
+          {github && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-white transition-colors"
+              title="GitHub Repo"
+            >
+              <Github size={20} />
+            </a>
+          )}
+          {live && (
+            <a
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-white transition-colors"
+              title="Live Demo"
+            >
+              <ExternalLink size={20} />
+            </a>
+          )}
         </div>
       </div>
     </motion.div>

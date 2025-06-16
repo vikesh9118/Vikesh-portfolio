@@ -9,16 +9,16 @@ import "./index.css";
 
 function App() {
   return (
-    <>
-     <div className="font-sans">
+    <div className="font-sans bg-gray-50 text-gray-900 dark:bg-[#0f172a] dark:text-white transition-colors duration-300">
       <Header />
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </div>
-    </>
   );
 }
 

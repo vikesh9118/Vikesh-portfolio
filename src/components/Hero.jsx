@@ -1,45 +1,57 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-scroll';
-import heroImage from '../assets/HeroImage.png';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 
 const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-white flex flex-col-reverse md:flex-row items-center justify-center px-6 md:px-16 py-24 gap-10"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-12 text-center relative overflow-hidden bg-zinc-900"
     >
-      <motion.div
-        className="text-center md:text-left w-full md:w-1/2 max-w-xl"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-          Hi, I'm <span className="text-blue-600">Vikesh Kumar</span>
-        </h1>
-        <p className="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
-          A passionate Full Stack Developer with experience in building fast, scalable, and beautiful web applications using Next.js, React, Node.js, MUI, Tailwind CSS, and shadcn/ui. Currently working on a Second Opinion platform with role-based access using AWS Amplify.
-        </p>
-        <Link to="projects" smooth={true} duration={500}>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-medium transition-all">
-            View Projects
-          </button>
-        </Link>
-      </motion.div>
+      {/* Glowing Circle */}
+      <div className="absolute -top-24 -left-24 w-[350px] h-[350px] sm:w-[400px] sm:h-[400px] bg-primary opacity-20 rounded-full blur-3xl z-0"></div>
 
-      <motion.div
-        className="w-full md:w-1/2 max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <img
-          src={heroImage}
-          alt="Hero"
-          className="w-full h-auto rounded-xl shadow-xl"
-        />
-      </motion.div>
+      <div className="max-w-2xl md:max-w-4xl z-10">
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-snug sm:leading-tight"
+        >
+          Hi, I'm{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+            Vikesh Kumar
+          </span>
+          <br />
+          A Passionate Software Developer
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-gray-300"
+        >
+          I design and build modern, responsive web applications using React and Tailwind, with focus on performance and elegance.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="mt-6 sm:mt-8"
+        >
+          <Link
+            to="projects"
+            smooth={true}
+            duration={500}
+            offset={-60}
+            className="inline-block px-5 py-3 sm:px-6 sm:py-3 bg-primary text-white font-semibold rounded-lg sm:rounded-xl shadow-md hover:bg-blue-600 transition duration-300 cursor-pointer"
+          >
+            View My Work
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 };

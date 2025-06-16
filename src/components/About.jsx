@@ -1,55 +1,50 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import aboutImg from '../assets/about-image.png';
+import React from "react";
+import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <section id="about" className="py-24 bg-gray-50">
-      <div className="container mx-auto px-6 md:px-16">
-        <motion.h2
-          className="text-4xl font-bold text-center text-blue-600 mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section
+      id="about"
+      className="min-h-screen flex items-center justify-center bg-zinc-900 py-20 px-6 md:px-12"
+    >
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* Text Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          About Me
-        </motion.h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6">
+            About Me
+          </h2>
+          <p className="text-gray-300 text-lg leading-relaxed mb-4">
+            I'm <span className="text-primary font-semibold">Vikesh Kumar</span>, a React-focused Software Developer with a passion for building modern, interactive, and scalable web applications. Currently working at EduviTech India Pvt Ltd.
+          </p>
+          <p className="text-gray-400 text-base">
+            I specialize in technologies like{" "}
+            <span className="text-white font-medium">
+              React, Tailwind CSS, Next.js, Bootstrap, and ShadCN UI
+            </span>
+            . With experience across healthcare, email marketing, and dashboards, I strive to craft responsive and user-centric solutions.
+          </p>
+        </motion.div>
 
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          <motion.div
-            className="w-full md:w-5/12 max-w-sm md:max-w-md"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <img
-              src={aboutImg}
-              alt="About Me"
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
-            />
-          </motion.div>
-
-          <motion.div
-            className="w-full md:w-7/12 text-lg text-gray-700 leading-relaxed"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="mb-6">
-              I'm Vikesh Kumar, a passionate Full Stack Developer currently working at EduviTech India Pvt Ltd. I specialize in building modern, responsive, and user-focused web applications using cutting-edge technologies.
+        {/* Side Visual / Animation */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="w-full h-full flex justify-center"
+        >
+          <div className="relative w-[260px] h-[260px] md:w-[320px] md:h-[320px] bg-primary rounded-full blur-[120px] opacity-20 absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="bg-gradient-to-br from-zinc-800 to-zinc-700 p-6 md:p-10 rounded-2xl shadow-lg border border-zinc-600">
+            <p className="text-xl text-white font-semibold">
+              Clean Code. Smooth UI. Real-world Impact.
             </p>
-            <p className="mb-6">
-              I've developed complex applications including medical imaging platforms, dynamic email editors, and AI-powered second opinion systems. I enjoy bringing designs to life and ensuring seamless user experiences.
-            </p>
-            <ul className="list-disc ml-6 space-y-2">
-              <li>🌐 Frontend: React, Next.js, Angular 19, Vue.js</li>
-              <li>🧠 Backend: Node.js, Express, MongoDB, Firebase</li>
-              <li>🎨 UI Libraries: Tailwind CSS, MUI, shadcn/ui, SCSS</li>
-              <li>☁️ Cloud & Auth: AWS Amplify, Firebase Auth, Role-based access</li>
-              <li>📊 Tools: Git, Postman, Chart.js, Framer Motion</li>
-            </ul>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

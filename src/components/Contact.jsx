@@ -1,80 +1,113 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import emailjs from 'emailjs-com';
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Send } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const formRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs.send('service_id', 'template_id', form, 'user_token')
-      .then(() => {
-        setSent(true);
-        setForm({ name: '', email: '', message: '' });
-      }).catch(err => {
-        alert('Error sending message!');
+    setLoading(true);
+    const formData = new FormData(formRef.current);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xqabbvkb", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
       });
+
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        formRef.current.reset();
+      } else {
+        toast.error("Failed to send message. Try again.");
+      }
+    } catch (err) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <section id="contact" className="py-24 bg-gray-50">
-      <div className="container mx-auto px-6 md:px-16 max-w-3xl">
+    <section id="contact" className="py-20 bg-zinc-900 text-white px-6 sm:px-12">
+      <Toaster position="top-right" />
+      <div className="max-w-4xl mx-auto">
         <motion.h2
-          className="text-4xl font-bold text-center text-blue-600 mb-10"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="text-4xl sm:text-5xl font-bold text-center mb-12 text-primary"
         >
-          Contact Me
+          Let's Connect
         </motion.h2>
 
-        {sent && (
-          <motion.p
-            className="text-green-600 font-medium text-center mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            Message sent successfully!
-          </motion.p>
-        )}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="bg-zinc-800 p-8 sm:p-12 rounded-2xl shadow-xl"
+        >
+          <form ref={formRef} onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block mb-2 font-semibold">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label className="block mb-2 font-semibold">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-zinc-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block mb-2 font-semibold">Message</label>
+              <textarea
+                name="message"
+                rows="5"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-zinc-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                placeholder="Write your message here..."
+              ></textarea>
+            </div>
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              disabled={loading}
+              className={`bg-primary hover:bg-blue-600 transition-all text-white py-3 px-6 rounded-xl font-semibold flex items-center justify-center gap-2 ${
+                loading && "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              <Send size={18} />
+              {loading ? "Sending..." : "Send Message"}
+            </motion.button>
+          </form>
+        </motion.div>
 
-        <form onSubmit={handleSubmit} className="grid gap-6">
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={form.name}
-            onChange={handleChange}
-            className="border px-4 py-3 rounded-lg"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={form.email}
-            onChange={handleChange}
-            className="border px-4 py-3 rounded-lg"
-            required
-          />
-          <textarea
-            name="message"
-            rows="5"
-            placeholder="Your Message"
-            value={form.message}
-            onChange={handleChange}
-            className="border px-4 py-3 rounded-lg"
-            required
-          />
-          <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">
-            Send Message
-          </button>
-        </form>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center text-sm text-gray-400 mt-12"
+        >
+          <Mail className="inline-block mr-2" size={16} />
+          vikeshkumar8548@gmail.com
+        </motion.div>
       </div>
     </section>
   );
